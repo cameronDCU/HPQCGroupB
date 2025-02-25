@@ -4,7 +4,6 @@
 #include <time.h>    // For time
 #include <mpi.h>     // For MPI functions
 
-#define N 100  // Number of particles
 #define L 10.0  // Box size
 #define T 1.0   // Temperature scale for velocity distribution
 #define DT 0.01 // Time step
@@ -98,6 +97,13 @@ int main(int argc, char **argv) {
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
     srand(time(NULL) + rank); // Seed random number generator
+    
+    // Convert input argument to integer
+    int N = atoi(argv[1]);
+    if (N <= 0) {
+        fprintf(stderr, "Error: Number of particles must be a positive integer.\n");
+        return 1;
+    }
 
     int local_N = N / size;
     Vector3 *local_pos = (Vector3 *)malloc(local_N * sizeof(Vector3));
