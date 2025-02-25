@@ -3,7 +3,6 @@
 #include <math.h>    // For sqrt, log, cos
 #include <time.h>    // For clock(), CLOCKS_PER_SEC
 
-#define N 100  // Number of particles
 #define L 10.0  // Box size
 #define T 1.0   // Temperature scale for velocity distribution
 #define DT 0.01 // Time step
@@ -89,11 +88,23 @@ void compute_properties(Vector3 *vel, int num_particles, double *temperature, do
     *pressure = (2.0 * kinetic_energy) / (3.0 * L * L * L);
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     clock_t start_time, end_time;
     start_time = clock();  // Start timing execution
 
     srand(time(NULL)); // Seed random number generator
+
+    if (argc != 2) {fprintf(stderr, "Usage: %s <number_of_particles>\n", argv[0]);
+        return 1;
+    }
+
+       // Convert input argument to integer
+    int N = atoi(argv[1]);
+    if (N <= 0) {
+        fprintf(stderr, "Error: Number of particles must be a positive integer.\n");
+        return 1;
+    }
+
 
     Vector3 *pos = (Vector3 *)malloc(N * sizeof(Vector3));
     Vector3 *vel = (Vector3 *)malloc(N * sizeof(Vector3));
