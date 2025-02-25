@@ -1,6 +1,6 @@
 # HPQCGroupB
 ## How to run the programs
-
+ 
 ### How to run the ideal_gas file
 -- locate it in the directory and run ./ideal_gas <num_particles>
 -- If at any point you want to make changes to the code, you can open the code using, nano ideal_gas.c, and compile the code using, gcc ideal_gas.c -o ideal_gas -lm
