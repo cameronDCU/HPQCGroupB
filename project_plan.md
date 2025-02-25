@@ -12,7 +12,7 @@ Convert the existing Python code for simulating an ideal gas in a 3D box to a C 
 
 Use MPI_Scatter to distribute the particles among the processes.
 
-Run simulation loop to update particle properties and checl if a collision with the wall has occured.
+Run simulation loop to update particle properties and check if a collision with the wall has occured.
 
 Each process will calculate Temperature, Net velocity and Pressure.
 
@@ -20,4 +20,4 @@ Each process will send the results to the root process and sum them using MPI_Re
 
 The root process will return the properties of the system.
 
-We will benchmark the performance of this program and compare it to a python program using MPI4py.
+We will benchmark the performance of this program and compare it to a python program, and C program which do not use MPI.
