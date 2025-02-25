@@ -141,7 +141,18 @@ int main(int argc, char **argv) {
     MPI_Reduce(&local_net_vel, &global_net_vel, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
     MPI_Reduce(&local_pressure, &global_pressure, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
 
-    // Stop execution time measurement
+    // Write the results to a CSV file (only at root process)
+    if (rank == 0) {
+        FILE *file = fopen("particle_properties.csv", "w");
+        if (file == NULL) {
+            fprintf(stderr, "Error opening file for writing\n");
+            MPI_Abort(MPI_COMM_WORLD, 1);
+        }
+        fprintf(file, "Temperature, Net_Velocity, Pressure\n");
+        fprintf(file, "%.2f, %.2f, %.2f\n", global_temp, global_net_vel, global_pressure);
+        fclose(file);
+    }
+// Stop execution time measurement
     double end_time = MPI_Wtime();
     double elapsed_time = end_time - start_time;
 
