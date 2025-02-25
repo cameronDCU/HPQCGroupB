@@ -12,6 +12,7 @@
 
 ## How The Programs Work
 
+The simulation initializes particles with random positions and velocities following the Maxwell-Boltzmann distribution, updates their motion over time, and handles elastic wall collisions. Key macroscopic properties such as temperature, pressure, and net velocity are computed to verify system behavior. The Python implementation uses NumPy for efficiency, while the C version leverages direct memory management for improved performance. The MPI version distributes particles across processes, updating them independently and aggregating results using MPI_Reduce, enabling scalability for large simulations. The project highlights a transition from an easy-to-develop Python model to a highly efficient parallelized approach in C.
 
 
 ## Benchmark
