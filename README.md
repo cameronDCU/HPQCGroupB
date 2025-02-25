@@ -11,3 +11,13 @@
 -- Run the line "python ideal_gas.py <num_processes>"
 
 ## How The Programs Work
+
+
+
+## Benchmark
+
+The codes were ran for various timesteps and the results can be seen below.
+
+![Benchmarking](https://github.com/cameronDCU/HPQCGroupB/blob/main/benchmark_group_hpqc.png)
+
+As can be observed, the C implementations of the code outperformed the Python prototype 'ideal_gas.py'. As the number of particles increased, MPI became more suitable for the task over the serial C implementation.
