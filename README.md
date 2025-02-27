@@ -31,14 +31,14 @@ Below are two examples of how the particle simulation data can be visualized. Th
    This visualization shows each particle’s position at each simulation step, with the simulation box drawn in wireframe. As the animation progresses, you can see how particles move and distribute themselves within the box.
 
    ![Animation Example]
-   (https://github.com/charliemunro/HPQCGroupB/blob/main/) 
+   (https://github.com/charliemunro/HPQCGroupB/blob/main/particle_animation.gif) 
    *Figure: Sample frame from the animated 3D scatter plot at Step 0.*
 
 3. **3D Particle Trajectories:**  
    This plot traces the paths of a subset of particles (e.g., the first 10) throughout the simulation, highlighting their motion from start to finish. Each particle’s initial position is marked with a distinct color and a small marker.
 
    ![Trajectories Example]
-   (https://github.com/charliemunro/HPQCGroupB/blob/main/)  
+   (https://github.com/charliemunro/HPQCGroupB/blob/main/3D_traj.png)  
    *Figure: 3D trajectories of 10 selected particles.*
 
 The Python code to generate these plots is provided in a separate script (see the repository for details). You can run it in a Jupyter notebook or as a standalone Python script to reproduce the figures and explore the simulation data interactively.
