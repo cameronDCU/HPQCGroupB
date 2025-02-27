@@ -129,8 +129,31 @@ int main(int argc, char **argv) {
 
     initialize_velocities(local_vel, local_N);
 
+    // Open the file to write particle positions, particle ID, and step
+    FILE *file = NULL;
+    if (rank == 0) {
+        file = fopen("particle_positions.csv", "w");
+        fprintf(file, "Step, Particle_ID, x, y, z\n");
+    }
+
+    // Main simulation loop
     for (int step = 0; step < STEPS; step++) {
         update_positions(local_pos, local_vel, local_N);
+
+        // Write particle positions to the file at each step
+        if (rank == 0) {
+            for (int i = 0; i < local_N; i++) {
+                fprintf(file, "%d, %d, %.2f, %.2f, %.2f\n", step, i, local_pos[i].x, local_pos[i].y, local_pos[i].z);
+            }
+        }
+
+        // Synchronize the processes
+        MPI_Barrier(MPI_COMM_WORLD);
+    }
+
+    // Close file after all steps are done
+    if (rank == 0) {
+        fclose(file);
     }
 
     double local_temp, local_net_vel, local_pressure;
@@ -152,7 +175,8 @@ int main(int argc, char **argv) {
         fprintf(file, "%.2f, %.2f, %.2f\n", global_temp, global_net_vel, global_pressure);
         fclose(file);
     }
-// Stop execution time measurement
+
+    // Stop execution time measurement
     double end_time = MPI_Wtime();
     double elapsed_time = end_time - start_time;
 
