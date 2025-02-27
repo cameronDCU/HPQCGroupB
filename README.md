@@ -14,6 +14,7 @@
 
 The simulation initializes particles with random positions and velocities following the Maxwell-Boltzmann distribution, updates their motion over time, and handles elastic wall collisions. Key macroscopic properties such as temperature, pressure, and net velocity are computed to verify system behavior. The Python implementation uses NumPy for efficiency, while the C version leverages direct memory management for improved performance. The MPI version distributes particles across processes, updating them independently and aggregating results using MPI_Reduce, enabling scalability for large simulations. The project highlights a transition from an easy-to-develop Python model to a highly efficient parallelized approach in C.
 
+The 'ideal_gas_mpi.c' file writes the positions of the particles over time to particle_positions.csv for later visualisation.
 
 ## Benchmark
 
@@ -28,7 +29,7 @@ As can be observed, the C implementations of the code outperformed the Python pr
 Below are two examples of how the particle simulation data can be visualized. These figures illustrate both the instantaneous positions of all particles within the 3D box and the individual trajectories of selected particles over time.
 
 1. **Particle Positions Over Time (Animated 3D Scatter):**  
-   This visualization shows each particle’s position at each simulation step, with the simulation box drawn in wireframe. As the animation progresses, you can see how particles move and distribute themselves within the box.
+   This visualization shows each particle’s position (taken from particle_positions.csv) at each simulation step, with the simulation box drawn in wireframe. As the animation progresses, you can see how particles move and distribute themselves within the box.
 
    ![Animation Example](https://github.com/cameronDCU/HPQCGroupB/blob/main/particle_animation.gif)  
    *Figure: Sample frame from the animated 3D scatter plot.*
